@@ -1,0 +1,66 @@
+npx - npm package runner
+npm - npm install create-react-app -g
+create-react-app projectname
+
+package json - dependecies and scripts to run the application
+package lock json - package log isolation of the depndecies
+
+4. Component Types:
+
+Stateless Fuctional Component -> return html
+Stateful Class Component -> Class extending Component Class| Render Method returning HTML
+
+App.js is a class component
+
+Functional Components
+
+JavaScript Function -> HTML(JSX)
+
+Class Components -> es6 class -> HTML JSX
+
+Functional Component vs Class component
+
+Use func componets as much as possible
+Absence of this keyword
+Sollution without using state
+
+
+Class Components
+
+Much feature rich
+Maintaint ther own private data -state
+Complex UI logic
+Prodive lifecycle hooks
+
+
+React 16.7.0 - alpha
+
+Cool new feature which kind of contradicts what we've learn about functional versus state 
+components
+2019 -> Hooks let you use state without using a class
+
+Hooks -> 
+No Braking changes
+Completley opt in & backwards-compatible
+Component types -> Functional component, Class component
+Using state lifecycle methods and this binding.
+
+
+JSX -> 
+Javascript XML - Extension to the JavaScript language syntax
+Write XML-like code for elements and components
+JSX tags have a tag name, attribues and childer
+
+
+JSX differences between HTML
+
+Class -> className
+for -> htmlFor
+onclick -> onClick
+tabindex -> tabIndex
+
+
+https://github.com/facebook/react/issues/13525
+
+
+
