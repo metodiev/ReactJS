@@ -1,0 +1,19 @@
+Hooks Hooks are a new addition in React 16.8. - https://reactjs.org/docs/hooks-intro.html
+
+
+10. Component State
+
+props vs state
+
+props - props get passed to the component
+fubction parameters
+props are immutable
+props - Functional Components
+this.props - Class Components
+
+state- is manged within the component 
+Variables declared in the function body
+state can be changed
+
+useState Hook - Functional Components
+this.state - Class Components

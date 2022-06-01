@@ -11,7 +11,7 @@ import Counter from './components/Counter';
 function App() {
   return (
     <div className="App">
-   
+    <Message/> 
      <Counter/>
       Create Statless Functional component 
      
