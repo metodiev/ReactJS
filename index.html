@@ -1,0 +1,193 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./index.js"></script>
+</head>
+<script type="text/javascript">
+    var numberOfTasks = 1;
+
+    function exportNumbersFromString(strs) {
+        var numberArray = strs;
+        numberArray = numberArray.replace('=', '');
+
+        var sign = numberArray[3];
+        numberArray = numberArray.replace('+', '');
+
+
+        var string = numberArray;
+        string = numberArray.split(" ");
+        var stringArray = new Array();
+        console.log(string)
+        for (var i = 0; i < string.length; i++) {
+            if (isNaN(string[i])) {
+                // stringArray.push(" ");
+            } else {
+                stringArray.push(string[i]);
+            }
+
+            if (i != string.length - 1) {
+                // stringArray.push(" ");
+            }
+        }
+
+        console.log(stringArray)
+        var firstNum = stringArray[0];
+        var secondNum = stringArray[2];
+        console.log(firstNum);
+        console.log(secondNum);
+        console.log(sign);
+        checkInputTask(firstNum, secondNum, sign);
+    }
+
+    function checkInputTask(firstNum, secondNum, sign, exptecterResult) {
+        switch (sign) {
+            case '+':
+                if (firstNum + secondNum != exptecterResult) {
+                    alert(firstNum + secondNum + "is not equal to " + exptecterResult)
+                }
+                break;
+            case '-':
+
+                if (firstNum - secondNum != exptecterResult){
+                    alert(firstNum - secondNum + "is not equal to " + exptecterResult)
+                }
+                break;
+            case '*':
+                if(firstNum * secondNum != exptecterResult){
+                    alert(firstNum * secondNum + "is not equal to " + exptecterResult)
+                }
+                break;
+            case '/':
+                if(firstNum / secondNum != exptecterResult){
+                    alert(firstNum / secondNum + "is not equal to " + exptecterResult)
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    function addNode() {
+        for (let index = 0; index < numberOfTasks; index++) {
+
+            var newP = document.createElement("p");
+            var str = generateSumTwoNumberTask();
+            exportNumbersFromString(str);
+            var textNode = document.createTextNode(generateSumTwoNumberTask());
+            newP.appendChild(textNode);
+            document.getElementById("firstP").appendChild(newP);
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "text");
+            x.setAttribute("id", "x" + index);
+            document.getElementById("firstP").appendChild(x);
+            alert(str.toString())
+
+            var newP1 = document.createElement("p");
+            var textNode1 = document.createTextNode(generateSubstractionTask());
+            newP1.appendChild(textNode1);
+            document.getElementById("second").appendChild(newP1);
+            var x1 = document.createElement("INPUT");
+            x1.setAttribute("type", "text");
+            x1.setAttribute("id", "x1" + index);
+            document.getElementById("second").appendChild(x1);
+
+
+            var newP2 = document.createElement("p");
+            var textNode2 = document.createTextNode(generateDivideTask());
+            newP2.appendChild(textNode2);
+            document.getElementById("third").appendChild(newP2);
+            var x2 = document.createElement("INPUT");
+            x2.setAttribute("type", "text");
+            x2.setAttribute("id", "x2" + index);
+            document.getElementById("third").appendChild(x2);
+
+            var newP3 = document.createElement("p");
+            var textNode3 = document.createTextNode(generateMultiplying());
+            newP3.appendChild(textNode3);
+            document.getElementById("fourth").appendChild(newP3);
+            var x3 = document.createElement("INPUT");
+            x3.setAttribute("type", "text");
+            x3.setAttribute("id", "x3" + index);
+            document.getElementById("fourth").appendChild(x3);
+
+            console.log(x3)
+
+        }
+    }
+
+    function generateMathTasks() {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "text");
+        x.setAttribute("value", "Hello World!");
+        document.body.appendChild(x);
+        return (generateSumTwoNumberTask() + " \n" + generateSubstractionTask());
+    }
+
+
+
+    function generateSumTwoNumberTask() {
+        return (generateRandomNumber().toString() + " + " + generateRandomNumber().toString() + "  =");
+
+    }
+
+    function generateSubstractionTask() {
+        var firstNumber = generateRandomNumber();
+        var secondNumber = generateRandomNumber();
+        do {
+            firstNumber = generateRandomNumber();
+            secondNumber = generateRandomNumber();
+        } while (firstNumber < secondNumber && (firstNumber - secondNumber < 0));
+        return (firstNumber.toString() + " - " + secondNumber.toString() + "  =");
+
+    }
+
+    function generateDivideTask() {
+        var firstNumber = generateRandomNumber();
+        var secondNumber = generateRandomNumber();
+        do {
+            firstNumber = generateRandomNumber();
+            secondNumber = generateRandomNumber();
+        } while (firstNumber < secondNumber && (firstNumber % secondNumber != 0));
+
+        return (firstNumber.toString() + " / " + secondNumber.toString() + "  =");
+
+    }
+
+    function generateMultiplying() {
+        return (generateRandomNumber().toString() + " * " + generateRandomNumber().toString() + "  = ");
+
+    }
+
+    function generateRandomNumber() {
+        return Math.floor(Math.random() * 100);
+
+    }
+    function getInputValue() {
+        for (let index = 0; index < numberOfTasks; index++) {
+
+
+        }
+        let tokenAmount = document.getElementById("x0").value;
+        alert(tokenAmount) // whatever you want to do with it
+    }
+
+</script>
+
+<body onload="addNode()">
+    <p id="firstP">Задачи По математика за 3 ти клас </p>
+    <p id="second"> </p>
+    <p id="third"> </p>
+    <p id="fourth"> </p>
+
+    <button type="button" onclick="getInputValue()">Провери Задачи</button>
+    <!-- <p id="second">Задачи По математика за 3 ти клас </p>
+    <p id="third">Задачи По математика за 3 ти клас </p>
+    <p id="fourth">Задачи По математика за 3 ти клас </p> -->
+</body>
+
+</html>
