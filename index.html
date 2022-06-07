@@ -5,23 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./index.js"></script>
 </head>
 <script type="text/javascript">
     var numberOfTasks = 1;
+    var errorCounter = 0;
+    var errorTasks = "";
 
-    function exportNumbersFromString(strs) {
+
+    function exportNumbersFromString(strs, expectedResult) {
         var numberArray = strs;
         numberArray = numberArray.replace('=', '');
 
         var sign = numberArray[3];
-        numberArray = numberArray.replace('+', '');
+        //numberArray = numberArray.replace('+', '');
 
 
         var string = numberArray;
         string = numberArray.split(" ");
         var stringArray = new Array();
-        console.log(string)
+       // console.log(string)
         for (var i = 0; i < string.length; i++) {
             if (isNaN(string[i])) {
                 // stringArray.push(" ");
@@ -34,36 +36,39 @@
             }
         }
 
-        console.log(stringArray)
+        // console.log(stringArray)
         var firstNum = stringArray[0];
-        var secondNum = stringArray[2];
-        console.log(firstNum);
-        console.log(secondNum);
-        console.log(sign);
-        checkInputTask(firstNum, secondNum, sign);
+        var secondNum = stringArray[1];
+        // console.log(firstNum);
+        // console.log(secondNum);
+        // console.log(sign);
+        checkInputTask(firstNum, secondNum, sign, expectedResult);
     }
 
     function checkInputTask(firstNum, secondNum, sign, exptecterResult) {
         switch (sign) {
             case '+':
-                if (firstNum + secondNum != exptecterResult) {
-                    alert(firstNum + secondNum + "is not equal to " + exptecterResult)
+                if (parseInt(firstNum, 10) + parseInt(secondNum, 10) != parseInt(exptecterResult, 10)) {
+                    errorTasks += (firstNum + "+" + secondNum + " is not equal to " + exptecterResult + '\n').toString();
+                    errorCounter++;
                 }
                 break;
             case '-':
-
-                if (firstNum - secondNum != exptecterResult){
-                    alert(firstNum - secondNum + "is not equal to " + exptecterResult)
+                if (parseInt(firstNum, 10) - parseInt(secondNum, 10) != parseInt(exptecterResult, 10)) {
+                    errorTasks += (firstNum + "-" + parseInt(secondNum, 10) + " is not equal to " + parseInt(exptecterResult, 10) + '\n').toString();
+                    errorCounter++;
                 }
                 break;
             case '*':
-                if(firstNum * secondNum != exptecterResult){
-                    alert(firstNum * secondNum + "is not equal to " + exptecterResult)
+                if (parseInt(firstNum, 10) * parseInt(secondNum, 10) != parseInt(exptecterResult, 10)) {
+                    errorTasks += (firstNum + "*" + parseInt(secondNum, 10) + " is not equal to " + parseInt(exptecterResult, 10) + '\n').toString();
+                    errorCounter++;
                 }
                 break;
             case '/':
-                if(firstNum / secondNum != exptecterResult){
-                    alert(firstNum / secondNum + "is not equal to " + exptecterResult)
+                if (parseInt(firstNum, 10) / parseInt(secondNum, 10) != parseInt(exptecterResult, 10)) {
+                    errorTasks += (firstNum + "/" + parseInt(secondNum, 10) + " is not equal to " + parseInt(exptecterResult, 10) + '\n').toString();
+                    errorCounter++;
                 }
                 break;
 
@@ -76,18 +81,17 @@
         for (let index = 0; index < numberOfTasks; index++) {
 
             var newP = document.createElement("p");
-            var str = generateSumTwoNumberTask();
-            exportNumbersFromString(str);
+            newP.setAttribute("id", "first" + index);
             var textNode = document.createTextNode(generateSumTwoNumberTask());
             newP.appendChild(textNode);
-            document.getElementById("firstP").appendChild(newP);
+            document.getElementById("first").appendChild(newP);
             var x = document.createElement("INPUT");
             x.setAttribute("type", "text");
             x.setAttribute("id", "x" + index);
-            document.getElementById("firstP").appendChild(x);
-            alert(str.toString())
+            document.getElementById("first").appendChild(x);
 
             var newP1 = document.createElement("p");
+            newP1.setAttribute("id", "second" + index);
             var textNode1 = document.createTextNode(generateSubstractionTask());
             newP1.appendChild(textNode1);
             document.getElementById("second").appendChild(newP1);
@@ -96,9 +100,9 @@
             x1.setAttribute("id", "x1" + index);
             document.getElementById("second").appendChild(x1);
 
-
             var newP2 = document.createElement("p");
             var textNode2 = document.createTextNode(generateDivideTask());
+            newP2.setAttribute("id", "third" + index);
             newP2.appendChild(textNode2);
             document.getElementById("third").appendChild(newP2);
             var x2 = document.createElement("INPUT");
@@ -107,6 +111,7 @@
             document.getElementById("third").appendChild(x2);
 
             var newP3 = document.createElement("p");
+            newP3.setAttribute("id", "fourth" + index);
             var textNode3 = document.createTextNode(generateMultiplying());
             newP3.appendChild(textNode3);
             document.getElementById("fourth").appendChild(newP3);
@@ -114,8 +119,6 @@
             x3.setAttribute("type", "text");
             x3.setAttribute("id", "x3" + index);
             document.getElementById("fourth").appendChild(x3);
-
-            console.log(x3)
 
         }
     }
@@ -128,11 +131,8 @@
         return (generateSumTwoNumberTask() + " \n" + generateSubstractionTask());
     }
 
-
-
     function generateSumTwoNumberTask() {
         return (generateRandomNumber().toString() + " + " + generateRandomNumber().toString() + "  =");
-
     }
 
     function generateSubstractionTask() {
@@ -169,17 +169,33 @@
     }
     function getInputValue() {
         for (let index = 0; index < numberOfTasks; index++) {
+            var str1 = document.getElementById("first" + index);
+            var expectedResult = document.getElementById("x" + index).value;
+            exportNumbersFromString(str1.innerHTML, expectedResult);
 
+            var str2 = document.getElementById("second" + index);
+            var expectedResult1 = document.getElementById("x1" + index).value;
+            exportNumbersFromString(str2.innerHTML, expectedResult1);
 
+            var str3 = document.getElementById("third" + index);
+            var expectedResult2 = document.getElementById("x2" + index).value;
+            exportNumbersFromString(str3.innerHTML, expectedResult2);
+
+            var str4 = document.getElementById("fourth" + index);
+            var expectedResult3 = document.getElementById("x3" + index).value;
+            exportNumbersFromString(str4.innerHTML, expectedResult3);
         }
-        let tokenAmount = document.getElementById("x0").value;
-        alert(tokenAmount) // whatever you want to do with it
+        console.log("Number of error task is:" + errorCounter);
+        console.log("Error tasks " + '\n' + errorTasks)
+        // whatever you want to do with it
+        errorCounter = 0;
+        errorTasks = "";
     }
 
 </script>
 
 <body onload="addNode()">
-    <p id="firstP">Задачи По математика за 3 ти клас </p>
+    <p id="first">Задачи По математика за 3 ти клас </p>
     <p id="second"> </p>
     <p id="third"> </p>
     <p id="fourth"> </p>
