@@ -23,7 +23,7 @@
         var string = numberArray;
         string = numberArray.split(" ");
         var stringArray = new Array();
-       // console.log(string)
+        // console.log(string)
         for (var i = 0; i < string.length; i++) {
             if (isNaN(string[i])) {
                 // stringArray.push(" ");
@@ -168,6 +168,8 @@
 
     }
     function getInputValue() {
+        errorCounter = 0;
+        errorTasks = "";
         for (let index = 0; index < numberOfTasks; index++) {
             var str1 = document.getElementById("first" + index);
             var expectedResult = document.getElementById("x" + index).value;
@@ -188,8 +190,35 @@
         console.log("Number of error task is:" + errorCounter);
         console.log("Error tasks " + '\n' + errorTasks)
         // whatever you want to do with it
-        errorCounter = 0;
-        errorTasks = "";
+       
+        userMark(errorCounter);
+    }
+
+    function userMark(errorCounter) {
+        switch (errorCounter) {
+            case 1:
+                console.log("Вашата оценкта е 5");
+                break;
+
+            case 2:
+                console.log("Вашата оценкта е 4");
+                break;
+
+            case 3:
+                console.log("Вашата оценкта е 3");
+                break;
+
+            case 4:
+                console.log("Вашата оценкта е 2");
+                break;
+
+            default:
+                break;
+        }
+
+        if (errorCounter > 4) {
+            console.log("Вашата оценкта е 2");
+        }
     }
 
 </script>
